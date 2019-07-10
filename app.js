@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// environment:
+//   PORT (default 8081)
 var express = require('express');
 var cors = require('cors');
 var app = express();
