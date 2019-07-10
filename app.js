@@ -9,7 +9,7 @@ app.use(body_parser.json());
 
 var config = require('./static_muelldata.json');
 
-nconf.file({file: require('path').resolve(__dirname, 'storage.json') });
+nconf.file({file: './storage.json' });
 var muell_log = nconf.get('muell_log');
 var muell_status = nconf.get('muell_status');
 
