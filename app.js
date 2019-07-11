@@ -14,7 +14,7 @@ var body_parser = require('body-parser');
 muelldata = process.env.MUELLDATA || './static_muelldata.json'
 muellconf = process.env.MUELLCONF || './storage.json'
 port = process.env.PORT || 8081
-
+console.log("starting muellshack with data: "+ muelldata + " config: " + muellconf + " on port " + port)
 app.use(cors());
 app.use(body_parser.json());
 
