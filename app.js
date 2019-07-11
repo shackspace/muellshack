@@ -1,18 +1,26 @@
 #!/usr/bin/env node
 // environment:
-//   PORT (default 8081)
+//   PORT (default: 8081)
+//   MUELLDATA (default: ./static_muelldata.json)
+//   MUELLCONF (default: ./storage.json)
+//             file will be written
+
 var express = require('express');
 var cors = require('cors');
 var app = express();
 var nconf = require('nconf');
 var body_parser = require('body-parser');
 
+muelldata = process.env.MUELLDATA || './static_muelldata.json'
+muellconf = process.env.MUELLCONF || './storage.json'
+port = process.env.PORT || 8081
+
 app.use(cors());
 app.use(body_parser.json());
 
-var config = require('./static_muelldata.json');
+var config = require(muelldata);
 
-nconf.file({file: './storage.json' });
+nconf.file({file: muellconf });
 var muell_log = nconf.get('muell_log');
 var muell_status = nconf.get('muell_status');
 
@@ -72,7 +80,7 @@ app.get('/muellshack/:muellarg', function(req, res, next) {
 	res.json(output);
 });
 
-app.listen(process.env.PORT || 8081);
+app.listen(port);
 
 function getNextMuelldate(muell_type) {
 	var muelldata = config[muell_type];
